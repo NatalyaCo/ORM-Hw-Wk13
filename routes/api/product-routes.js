@@ -6,28 +6,29 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // get all products
 router.get('/', async (req, res) => {
   // find all products
-  try {
+  // try {
     const productData = await Product.findAll({
       include: [{
           model: Category,
       },
         {
           model: Tag,
+          as:"tags"
         }
       ]
     });
     res.status(200).json(productData);
-  } catch (error) {
+  // } catch (error) {
 
-    res.status(500).json(error);
-  }
+  //   res.status(500).json(error);
+  // }
 });
 
 // get one product
 router.get('/:id', (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
-});
+
 Product.findOne({
   where: {
     id: req.params.id
@@ -48,7 +49,7 @@ Product.findOne({
   console.log(error);
   res.status(500).json(error);
 });
-
+});
 // create new product
 router.post('/', (req, res) => {
   /* req.body should look like this...
